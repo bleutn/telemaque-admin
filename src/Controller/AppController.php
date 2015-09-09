@@ -15,6 +15,7 @@
 namespace App\Controller;
 
 use Cake\Controller\Controller;
+use Cake\Event\Event;
 
 /**
  * Application Controller
@@ -47,13 +48,14 @@ class AppController extends Controller
                     ]
                 ]
             ],
-            'loginAction' => [
-                'controller' => 'Users',
-                'action' => 'login'
+            'loginRedirect' => [
+                'controller' => 'Articles',
+                'action' => 'index'
             ],
-            'logoutAction' => [
-                'controller' => 'Users',
-                'action' => 'logout'
+            'logoutRedirect' => [
+                'controller' => 'Pages',
+                'action' => 'display',
+                'home'
             ]
         ]);
 
@@ -62,8 +64,11 @@ class AppController extends Controller
         $this->Auth->allow(['display']);
     }
 
-    public function beforeFilter(\Cake\Event\Event $event)
+    /**
+     * @param Event $event
+     */
+    public function beforeFilter(Event $event)
     {
-        $this->Auth->deny(['display']);
+        $this->Auth->deny(['index', 'view', 'display']);
     }
 }
