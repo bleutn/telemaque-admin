@@ -73,6 +73,7 @@ $cakeDescription = 'Telemaque | Admin Dashboard';
                     'action' => 'login'
                 ],
                 [ 'class' => 'logo', 'escape' => false]);
+                $user = $_SESSION['Auth']['User'];
             ?>
 
             <!-- Header Navbar: style can be found in header.less -->
@@ -275,7 +276,7 @@ $cakeDescription = 'Telemaque | Admin Dashboard';
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <?= $this->Html->image('dist/img/user2-160x160.jpg', ['class' => 'user-image', 'alt' => 'User Image']); ?>
-                                <span class="hidden-xs"><?= isset($user)?$user['email'].' '.$user['surname']:'John Doe' ?></span>
+                                <span class="hidden-xs"><?= isset($user)?$user['name'].' '.$user['surname']:'John Doe' ?></span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
@@ -284,7 +285,7 @@ $cakeDescription = 'Telemaque | Admin Dashboard';
                                     <p>
                                         <?= isset($user)?$user['name'].' '.$user['surname']:'Jhon Doe' ?> -
                                         <?= isset($user)?$user['user_type']:'User' ?>
-                                        <small>Member since Nov. 2012</small>
+                                        <small>Member since <?= $user['created']; ?></small>
                                     </p>
                                 </li>
                                 <!-- Menu Body -->
@@ -353,6 +354,13 @@ $cakeDescription = 'Telemaque | Admin Dashboard';
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu" style="display: block">
+                            <li>
+                                <?= $this->Html->link(
+                                    $this->Html->tag('span', 'Users').
+                                    $this->Html->tag('i', '', ['class'=>'fa fa-search pull-right']),
+                                    ['controller'=>'Users', 'action'=>'index'], ['escape'=>false]);
+                                ?>
+                            </li>
                             <li>
                                 <?= $this->Html->link(
                                     $this->Html->tag('span', 'Orders').
