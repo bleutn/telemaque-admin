@@ -73,7 +73,10 @@ $cakeDescription = 'Telemaque | Admin Dashboard';
                     'action' => 'login'
                 ],
                 [ 'class' => 'logo', 'escape' => false]);
-                $user = $_SESSION['Auth']['User'];
+                if (isset($_SESSION['Auth']['User']))
+                {
+                    $user = $_SESSION['Auth']['User'];
+                }
             ?>
 
             <!-- Header Navbar: style can be found in header.less -->
@@ -275,16 +278,20 @@ $cakeDescription = 'Telemaque | Admin Dashboard';
                         <!-- User Account: style can be found in dropdown.less -->
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <?= $this->Html->image('dist/img/user2-160x160.jpg', ['class' => 'user-image', 'alt' => 'User Image']); ?>
-                                <span class="hidden-xs"><?= isset($user)?$user['name'].' '.$user['surname']:'John Doe' ?></span>
+                                <?php if (isset($user)): ?>
+                                    <?= $this->Html->image('dist/img/user2-160x160.jpg', ['class' => 'user-image', 'alt' => 'User Image']); ?>
+                                <?php endif; ?>
+                                <span class="hidden-xs"><?= isset($user)?$user['name'].' '.$user['surname']:'' ?></span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
                                 <li class="user-header">
-                                    <?= $this->Html->image('dist/img/user2-160x160.jpg', ['class' => 'img-circle', 'alt' => 'User Image']); ?>
+                                    <?php if (isset($user)): ?>
+                                        <?= $this->Html->image('dist/img/user2-160x160.jpg', ['class' => 'img-circle', 'alt' => 'User Image']); ?>
+                                    <?php endif; ?>
                                     <p>
-                                        <?= isset($user)?$user['name'].' '.$user['surname']:'Jhon Doe' ?> -
-                                        <?= isset($user)?$user['user_type']:'User' ?>
+                                        <?= isset($user)?$user['name'].' '.$user['surname']:'' ?> -
+                                        <?= isset($user)?$user['user_type']:'' ?>
                                         <small>Member since <?= $user['created']; ?></small>
                                     </p>
                                 </li>
@@ -327,10 +334,12 @@ $cakeDescription = 'Telemaque | Admin Dashboard';
                 <!-- Sidebar user panel -->
                 <div class="user-panel">
                     <div class="pull-left image">
-                        <?= $this->Html->image('dist/img/user2-160x160.jpg', ['class' => 'img-circle', 'alt' => 'User Image']); ?>
+                        <?php if (isset($user)): ?>
+                            <?= $this->Html->image('dist/img/user2-160x160.jpg', ['class' => 'img-circle', 'alt' => 'User Image']); ?>
+                        <?php endif; ?>
                     </div>
                     <div class="pull-left info">
-                        <p><?= isset($user)?$user['name'].' '.$user['surname']:'John Doe' ?></p>
+                        <p><?= isset($user)?$user['name'].' '.$user['surname']:'' ?></p>
                         <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                     </div>
                 </div>
@@ -417,7 +426,7 @@ $cakeDescription = 'Telemaque | Admin Dashboard';
                     </section>
                     <section class="content">
                         <div class="row">
-                            <?= $this->fetch('content') ?>
+                            <?= $this->fetch('content'); ?>
                         </div>
                     </section>
                 </div>

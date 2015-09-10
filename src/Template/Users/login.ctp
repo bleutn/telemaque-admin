@@ -1,7 +1,7 @@
 <div id="content" class="col-md-6">
     <div class="box box-info">
         <div class="box-header with-border">
-            <h3 class="box-title">Horizontal Form</h3>
+            <h3 class="box-title">Please Login</h3>
         </div><!-- /.box-header -->
         <!-- form start -->
         <form class="form-horizontal" method="post">
@@ -33,7 +33,7 @@
                     <button type="submit" class="btn btn-default">Cancel</button>
                 </div>
                 <div class="form-group pull-right">
-                    <button type="submit" class="btn btn-info" formaction="login">Sign in</button>
+                    <button type="submit" class="btn btn-info" formaction="">Sign in</button>
                     <button type="submit" class="btn btn-info" formaction="add">Register</button>
                 </div>
             </div><!-- /.box-footer -->

@@ -120,12 +120,12 @@ class UsersController extends AppController
             $isIdentified = $this->Auth->identify();
             if ($isIdentified) {
                 $this->Auth->setUser($isIdentified);
+                $user = $this->Users->patchEntity($user, $this->request->data);
+                $this->set('user', $user);
                 return $this->redirect($this->Auth->redirectUrl());
             }
             $this->Flash->error('Votre username ou mot de passe est incorrect.');
         }
-        $user = $this->Users->patchEntity($user, $this->request->data);
-        $this->set('user', $user);
     }
 
     public function logout()
