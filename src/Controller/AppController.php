@@ -49,7 +49,7 @@ class AppController extends Controller
                 ]
             ],
             'loginRedirect' => [
-                'controller' => 'Articles',
+                'controller' => 'Orders',
                 'action' => 'index'
             ],
             'logoutRedirect' => [
@@ -59,9 +59,6 @@ class AppController extends Controller
             ]
         ]);
 
-        // Allow the display action so our pages controller
-        // continues to work.
-        $this->Auth->allow(['display']);
     }
 
     /**
@@ -69,6 +66,6 @@ class AppController extends Controller
      */
     public function beforeFilter(Event $event)
     {
-        $this->Auth->deny(['index', 'view', 'display']);
+        $this->Auth->deny();
     }
 }

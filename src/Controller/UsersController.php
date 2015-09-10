@@ -21,6 +21,7 @@ class UsersController extends AppController
     {
         $this->set('users', $this->paginate($this->Users));
         $this->set('_serialize', ['users']);
+        //$this->set('users', $this->Users->find('all'));
     }
 
     /**
@@ -56,7 +57,8 @@ class UsersController extends AppController
                 $this->Flash->error(__('The user could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('user'));
+        //$this->set(compact('user'));
+        $this->set('user', $user);
         $this->set('_serialize', ['user']);
     }
 
@@ -113,14 +115,17 @@ class UsersController extends AppController
     public function login()
     {
         $this->layout = "default";
+        $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
-            $user = $this->Auth->identify();
-            if ($user) {
-                $this->Auth->setUser($user);
+            $isIdentified = $this->Auth->identify();
+            if ($isIdentified) {
+                $this->Auth->setUser($isIdentified);
                 return $this->redirect($this->Auth->redirectUrl());
             }
             $this->Flash->error('Votre username ou mot de passe est incorrect.');
         }
+        $user = $this->Users->patchEntity($user, $this->request->data);
+        $this->set('user', $user);
     }
 
     public function logout()
