@@ -34,7 +34,7 @@
             <h6 class="subheader"><?= __('Icon Link') ?></h6>
             <p><?= h($article->icon_link) ?></p>
             <h6 class="subheader"><?= __('Img Link') ?></h6>
-            <p><?= h($article->img_link) ?></p>
+            <p><?= h($article->img_link) ?><?= $this->Html->image($article->img_link);?></p>
         </div>
         <div class="large-2 columns numbers end">
             <h6 class="subheader"><?= __('Id') ?></h6>
